@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class CurrencyConveter extends JFrame {
-    private JLabel amountLabel;
+    private JLabel amountLab;
     private JTextField amountTextField;
-    private JLabel fromLabel;
+    private JLabel fromLab;
     private JComboBox<String> fromComboBox;
-    private JLabel toLabel;
+    private JLabel toLab;
     private JComboBox<String> toComboBox;
     private JButton convertButton;
-    private JLabel resultLabel;
+    private JLabel resLab;
 
     private static final String[] currencies = {"USD", "EUR", "GBP", "JPY"};
 
@@ -20,14 +20,14 @@ class CurrencyConveter extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        amountLabel = new JLabel("Amount (USD):");
+        amountLab = new JLabel("Amount (USD):");
         amountTextField = new JTextField(50);
-        fromLabel = new JLabel("From Currency:");
+        fromLab = new JLabel("From Currency:");
         fromComboBox = new JComboBox<>(currencies);
-        toLabel = new JLabel("To Currency:");
+        toLab = new JLabel("To Currency:");
         toComboBox = new JComboBox<>(currencies);
         convertButton = new JButton("Convert");
-        resultLabel = new JLabel();
+        resLab = new JLabel();
 
         convertButton.addActionListener(new ActionListener() {
             @Override
@@ -38,24 +38,24 @@ class CurrencyConveter extends JFrame {
 
                 double convertedAmount = convertCurrency(amount, fromCurrency, toCurrency);
 
-                resultLabel.setText(String.format("%.2f %s = %.2f %s", amount, fromCurrency, convertedAmount, toCurrency));
+                resLab.setText(String.format("%.2f %s = %.2f %s", amount, fromCurrency, convertedAmount, toCurrency));
             }
         });
 
-        add(amountLabel);
+        add(amountLab);
         add(amountTextField);
-        add(fromLabel);
+        add(fromLab);
         add(fromComboBox);
-        add(toLabel);
+        add(toLab);
         add(toComboBox);
         add(convertButton);
-        add(resultLabel);
+        add(resLab);
 
         pack();
         setLocationRelativeTo(null);
     }
 
-    private double convertCurrency(double amount, String fromCurrency, String toCurrency) {
+    private double convertCurrency(double amount, String fromCurr, String toCurr) {
         double usdToEur = 0.85;
         double usdToGbp = 0.72;
         double usdToJpy = 109.67;
@@ -63,7 +63,7 @@ class CurrencyConveter extends JFrame {
         double rateFrom;
         double rateTo;
 
-        switch (fromCurrency) {
+        switch (fromCurr) {
             case "USD":
                 rateFrom = 1.0;
                 break;
@@ -80,7 +80,7 @@ class CurrencyConveter extends JFrame {
                 rateFrom = 1.0;
         }
 
-        switch (toCurrency) {
+        switch (toCurr) {
             case "USD":
                 rateTo = 1.0;
                 break;
